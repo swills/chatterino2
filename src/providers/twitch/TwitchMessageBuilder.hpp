@@ -17,6 +17,13 @@ using EmotePtr = std::shared_ptr<const Emote>;
 class Channel;
 class TwitchChannel;
 
+struct TwitchEmoteOccurence {
+    int start;
+    int end;
+    EmotePtr ptr;
+    EmoteName name;
+};
+
 class TwitchMessageBuilder : public MessageBuilder
 {
 public:
@@ -56,21 +63,18 @@ private:
     void parseUsernameColor();
     void parseUsername();
     void appendUsername();
-    void runIgnoreReplaces(
-        std::vector<std::tuple<int, EmotePtr, EmoteName>> &twitchEmotes);
+    void runIgnoreReplaces(std::vector<TwitchEmoteOccurence> &twitchEmotes);
     // parseHighlights only updates the visual state of the message, but leaves the playing of alerts and sounds to the triggerHighlights function
     void parseHighlights();
 
     boost::optional<EmotePtr> getTwitchBadge(const Badge &badge);
-    void appendTwitchEmote(
-        const QString &emote,
-        std::vector<std::tuple<int, EmotePtr, EmoteName>> &vec,
-        std::vector<int> &correctPositions);
+    void appendTwitchEmote(const QString &emote,
+                           std::vector<TwitchEmoteOccurence> &vec,
+                           std::vector<int> &correctPositions);
     Outcome tryAppendEmote(const EmoteName &name);
 
-    void addWords(
-        const QStringList &words,
-        const std::vector<std::tuple<int, EmotePtr, EmoteName>> &twitchEmotes);
+    void addWords(const QStringList &words,
+                  const std::vector<TwitchEmoteOccurence> &twitchEmotes);
     void addTextOrEmoji(EmotePtr emote);
     void addTextOrEmoji(const QString &value);
 
