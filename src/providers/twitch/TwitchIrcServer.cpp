@@ -14,6 +14,7 @@
 #include "providers/twitch/TwitchAccount.hpp"
 #include "providers/twitch/TwitchChannel.hpp"
 #include "providers/twitch/TwitchHelpers.hpp"
+#include "qlogging.hpp"
 #include "util/PostToThread.hpp"
 
 // using namespace Communi;
@@ -55,7 +56,7 @@ void TwitchIrcServer::initializeConnection(IrcConnection *connection,
     std::shared_ptr<TwitchAccount> account =
         getApp()->accounts->twitch.getCurrent();
 
-    qDebug() << "logging in as" << account->getUserName();
+    qCDebug(chatterinoTwitch) << "logging in as" << account->getUserName();
 
     QString username = account->getUserName();
     QString oauthToken = account->getOAuthToken();

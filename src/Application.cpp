@@ -16,6 +16,7 @@
 #include "providers/irc/Irc2.hpp"
 #include "providers/twitch/PubsubClient.hpp"
 #include "providers/twitch/TwitchIrcServer.hpp"
+#include "qlogging.hpp"
 #include "singletons/Emotes.hpp"
 #include "singletons/Fonts.hpp"
 #include "singletons/Logging.hpp"
@@ -339,7 +340,8 @@ void Application::initPubsub()
         }
         else
         {
-            qDebug() << "Couldn't find channel id of point reward";
+            qCDebug(chatterinoApp)
+                << "Couldn't find channel id of point reward";
         }
     });
 

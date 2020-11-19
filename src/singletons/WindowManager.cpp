@@ -19,6 +19,7 @@
 #include "providers/irc/IrcChannel2.hpp"
 #include "providers/irc/IrcServer.hpp"
 #include "providers/twitch/TwitchIrcServer.hpp"
+#include "qlogging.hpp"
 #include "singletons/Fonts.hpp"
 #include "singletons/Paths.hpp"
 #include "singletons/Settings.hpp"
@@ -85,7 +86,7 @@ WindowManager::WindowManager()
     : windowLayoutFilePath(
           combinePath(getPaths()->settingsDirectory, WINDOW_LAYOUT_FILENAME))
 {
-    qDebug() << "init WindowManager";
+    qCDebug(chatterinoWindowmanager) << "init WindowManager";
 
     auto settings = getSettings();
 
@@ -270,7 +271,7 @@ Window *WindowManager::windowAt(int index)
     {
         return nullptr;
     }
-    qDebug() << "getting window at bad index" << index;
+    qCDebug(chatterinoWindowmanager) << "getting window at bad index" << index;
 
     return this->windows_.at(index);
 }
@@ -343,7 +344,7 @@ void WindowManager::save()
     {
         return;
     }
-    qDebug() << "[WindowManager] Saving";
+    qCDebug(chatterinoWindowmanager) << "[WindowManager] Saving";
     assertInGuiThread();
     QJsonDocument document;
 

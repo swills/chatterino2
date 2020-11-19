@@ -7,6 +7,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QStringList>
+#include "qlogging.hpp"
 
 namespace chatterino {
 
@@ -38,12 +39,13 @@ Args::Args(const QApplication &app)
 
     if (!parser.parse(app.arguments()))
     {
-        qWarning() << "Unhandled options:" << parser.unknownOptionNames();
+        qCWarning(chatterinoArgs)
+            << "Unhandled options:" << parser.unknownOptionNames();
     }
 
     if (parser.isSet("help"))
     {
-        qInfo().noquote() << parser.helpText();
+        qCInfo(chatterinoArgs).noquote() << parser.helpText();
         ::exit(EXIT_SUCCESS);
     }
 

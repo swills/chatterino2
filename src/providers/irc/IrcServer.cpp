@@ -7,6 +7,7 @@
 #include "providers/irc/Irc2.hpp"
 #include "providers/irc/IrcChannel2.hpp"
 #include "providers/irc/IrcMessageBuilder.hpp"
+#include "qlogging.hpp"
 #include "singletons/Settings.hpp"
 #include "util/QObjectRef.hpp"
 
@@ -187,7 +188,7 @@ void IrcServer::privateMessageReceived(Communi::IrcPrivateMessage *message)
         }
         else
         {
-            qDebug() << "message ignored :rage:";
+            qCDebug(chatterinoIrc) << "message ignored :rage:";
         }
     }
 }

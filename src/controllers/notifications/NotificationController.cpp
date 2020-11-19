@@ -6,6 +6,7 @@
 #include "controllers/notifications/NotificationModel.hpp"
 #include "providers/twitch/TwitchIrcServer.hpp"
 #include "providers/twitch/api/Helix.hpp"
+#include "qlogging.hpp"
 #include "singletons/Toasts.hpp"
 #include "singletons/WindowManager.hpp"
 #include "widgets/Window.hpp"
@@ -146,8 +147,8 @@ void NotificationController::getFakeTwitchChannelLiveStatus(
     getHelix()->getStreamByName(
         channelName,
         [channelName, this](bool live, const auto &stream) {
-            qDebug() << "[TwitchChannel" << channelName
-                     << "] Refreshing live status";
+            qCDebug(chatterinoNotification) << "[TwitchChannel" << channelName
+                                            << "] Refreshing live status";
 
             if (!live)
             {
@@ -185,8 +186,9 @@ void NotificationController::getFakeTwitchChannelLiveStatus(
             fakeTwitchChannels.push_back(channelName);
         },
         [channelName, this] {
-            qDebug() << "[TwitchChannel" << channelName
-                     << "] Refreshing live status (Missing ID)";
+            qCDebug(chatterinoNotification)
+                << "[TwitchChannel" << channelName
+                << "] Refreshing live status (Missing ID)";
             this->removeFakeChannel(channelName);
         });
 }

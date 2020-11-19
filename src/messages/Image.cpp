@@ -14,6 +14,7 @@
 #include "common/NetworkRequest.hpp"
 #include "debug/AssertInGuiThread.hpp"
 #include "debug/Benchmark.hpp"
+#include "qlogging.hpp"
 #include "singletons/Emotes.hpp"
 #include "singletons/WindowManager.hpp"
 #include "util/DebugCount.hpp"
@@ -130,8 +131,9 @@ namespace detail {
 
         if (reader.imageCount() == 0)
         {
-            qDebug() << "Error while reading image" << url.string << ": '"
-                     << reader.errorString() << "'";
+            qCDebug(chatterinoImage)
+                << "Error while reading image" << url.string << ": '"
+                << reader.errorString() << "'";
             return frames;
         }
 
@@ -149,8 +151,9 @@ namespace detail {
 
         if (frames.size() == 0)
         {
-            qDebug() << "Error while reading image" << url.string << ": '"
-                     << reader.errorString() << "'";
+            qCDebug(chatterinoImage)
+                << "Error while reading image" << url.string << ": '"
+                << reader.errorString() << "'";
         }
 
         return frames;

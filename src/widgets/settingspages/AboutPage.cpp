@@ -2,6 +2,7 @@
 
 #include "common/Modes.hpp"
 #include "common/Version.hpp"
+#include "qlogging.hpp"
 #include "util/LayoutCreator.hpp"
 #include "util/RemoveScrollAreaBackground.hpp"
 #include "widgets/BasePopup.hpp"
@@ -166,7 +167,8 @@ AboutPage::AboutPage()
 
                 if (contributorParts.size() != 4)
                 {
-                    qDebug() << "Missing parts in line" << line;
+                    qCDebug(chatterinoWidget)
+                        << "Missing parts in line" << line;
                     continue;
                 }
 

@@ -8,6 +8,7 @@
 #include <QErrorMessage>
 #include <QFileInfo>
 #include <QProcess>
+#include "qlogging.hpp"
 
 #include <functional>
 
@@ -92,7 +93,7 @@ namespace {
             }
             else
             {
-                qWarning() << "Error occured" << err;
+                qCWarning(chatterinoStreamlink) << "Error occured" << err;
             }
 
             p->deleteLater();
@@ -119,7 +120,7 @@ void getStreamQualities(const QString &channelURL,
         [=](int res) {
             if (res != 0)
             {
-                qWarning() << "Got error code" << res;
+                qCWarning(chatterinoStreamlink) << "Got error code" << res;
                 // return;
             }
             QString lastLine = QString(p->readAllStandardOutput());
